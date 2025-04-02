@@ -36,12 +36,21 @@ if ((_backpack isEqualTo "") or ([_unit] call FUNC(chestpack)) isEqualTo "") exi
 
 //remove packs
 [_unit] call FUNC(removeChestpack);
+if (missionNamespace getVariable ["ace_movement", false]) then {
+    private _weight = loadAbs backpackContainer _unit;
+    [_unit, _unit, _weight] call ace_movement_fnc_addLoadToUnitContainer;
+};
 removeBackpackGlobal _unit;
 
 //add backpack loadout
 private _loadout = getUnitLoadout _unit;
 _loadout set [5, [_chestpack, _chestpackLoadout]];
 _unit setUnitLoadout _loadout;
+
+if (missionNamespace getVariable ["ace_movement", false]) then {
+    private _weight = loadAbs backpackContainer _unit;
+    [_unit, _unit, -_weight] call ace_movement_fnc_addLoadToUnitContainer;
+};
 
 //add backpack variables
 private _backpackNew = backpackContainer _unit;

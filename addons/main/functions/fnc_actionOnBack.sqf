@@ -27,6 +27,12 @@ if ((_chestpack isEqualTo "") or !(backpack _unit isEqualTo "")) exitWith {};
 private _loadout = getUnitLoadout _unit;
 _loadout set [5, [_chestpack, _chestpackLoadout]];
 _unit setUnitLoadout _loadout;
+
+if (missionNamespace getVariable ["ace_movement", false]) then {
+    private _weight = loadAbs backpackContainer _unit;
+    [_unit, _unit, -_weight] call ace_movement_fnc_addLoadToUnitContainer;
+};
+
 //prefilled versions of backpacks (ammo bearer, engineer, explosives, medic, repair, etc)
 //can be emptied and placed in unit's backpack
 //they must each be emptied when added

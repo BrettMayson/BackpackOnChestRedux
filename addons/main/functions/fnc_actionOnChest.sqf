@@ -30,4 +30,9 @@ private _backpackVariables = [];
 
 [_unit, _backpack, _backpackLoadout, _backpackVariables, _backpackLoad] call FUNC(addChestpack);
 
+if (missionNamespace getVariable ["ace_movement", false]) then {
+    private _weight = loadAbs backpackContainer _unit;
+    [_unit, _unit, _weight] call ace_movement_fnc_addLoadToUnitContainer;
+};
+
 removeBackpackGlobal _unit;
