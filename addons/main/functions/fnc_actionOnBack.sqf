@@ -30,6 +30,7 @@ _unit setUnitLoadout _loadout;
 
 if (missionNamespace getVariable ["ace_movement", false]) then {
     private _weight = loadAbs backpackContainer _unit;
+    _weight = _weight + ([typeOf backpackContainer _unit] call FUNC(itemMass));
     [_unit, _unit, -_weight] call ace_movement_fnc_addLoadToUnitContainer;
 };
 
